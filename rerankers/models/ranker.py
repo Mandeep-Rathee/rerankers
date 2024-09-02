@@ -50,3 +50,16 @@ class BaseRanker(ABC):
             print(
                 'Please run `pip install "rerankers[langchain]"` to get all the required dependencies.'
             )
+
+    def as_pyterrier_transformer(self):
+        try:
+            from rerankers.integrations.pyterrier import RerankerPyterrierTransformer
+
+            return RerankerPyterrierTransformer(model=self)
+        except ImportError:
+            print(
+                "You need to install pyterrier to export a reranker as a PyTerrier Transformer!"
+            )
+            print(
+                'Please run `pip install "rerankers[pyterrier]"` to get all the required dependencies.'
+            )
